@@ -57,7 +57,7 @@ function  burn(uint256 amount) public virtual {
 }
 ```
 ##
-## [G-02] Cache 	`attributes.length` only once to avoid extra gas usage
+## [G-02] Cache `attributes.length` only once to avoid extra gas usage
 #### Summary: 
 The `attributesLength` caches to avoid computation of array length of state variable (costly) with each iteration is appreciated.
 
@@ -79,17 +79,17 @@ it can save some gas, though we might introduce `mstore` opcode use, but since t
 ```
 
 #### Recommendation: 
- ```diff
- function addAttributeDivisor(uint8[] memory attributeDivisors) external {
-      + uint256 attributesLength = attributes.length;
+```diff
+function addAttributeDivisor(uint8[] memory attributeDivisors) external {
++ 	uint256 attributesLength = attributes.length;
         require(msg.sender == _ownerAddress);
         require(attributeDivisors.length == attributesLength);
 
-      - uint256 attributesLength = attributes.length;
+- 	uint256 attributesLength = attributes.length;
         for (uint8 i = 0; i < attributesLength; i++) {
             attributeToDnaDivisor[attributes[i]] = attributeDivisors[i];
         }
-    }    
+}    
 ```
 ### Another Instance: 
 #### [createPhysicalAttributes](https://github.com/code-423n4/2024-02-ai-arena/blob/cd1a0e6d1b40168657d1aaee8223dc050e15f8cc/src/AiArenaHelper.sol#L96-L98)
