@@ -23,7 +23,7 @@
 | --------------- | ---------------------------------------------------------------------------------------------------- |  
 | [G-01](#g-01-check-for-amount--0-before-making-_burn-call) | Unspecified Compiler version pragma                              |  
 | [G-02](#g-02-cache-attributeslength-only-once-to-avoid-extra-gas-usage) | Consideration for Timestamp overflow in `_replenishVoltage()`                           |  
-| [G-03](#l-03-redundant-operation-of-initializing-attributeProbabilities-mapping-in-constructor-leads-to-unnecessary-gas-consumption) |  Redundant operation of initializing attributeProbabilities mapping in `constructor` leads to unnecessary gas consumption            |  
+| [G-03](#g-03-redundant-operation-of-initializing-attributeProbabilities-mapping-in-constructor-leads-to-unnecessary-gas-consumption) |  Redundant operation of initializing attributeProbabilities mapping in `constructor` leads to unnecessary gas consumption            |  
 | [L - 04](#l-04-setupairdrop-function-arg-recipients-can-have-duplicates) | `setupAirdrop()` function arg: recipients[] can have duplicates                    | 
 | [L - 05](#l-05-unsafe-erc20-operations-use-safeerc20-library) | Unsafe ERC20 Operation(s), use `SafeERC20` library            |  
 | [L - 06](#l-06-transferfrom-returns-a-bool-value-in-claim-which-is-not-checked) | `transferFrom()` returns a bool value in `claim()`, which is not checked                  |  
@@ -107,7 +107,7 @@ uint256 attributesLength = attributes.length;
 - uint256 attributesLength = attributes.length;
 ```
 ##
-## [G-02] Redundant operation of initializing attributeProbabilities mapping in `constructor` leads to unnecessary gas consumption  
+## [G-03] Redundant operation of initializing attributeProbabilities mapping in `constructor` leads to unnecessary gas consumption  
 #### Description: 
 In the `constructor` while initializing state variables, we make `addAttributeProbabilities(0, probabilities)` function call which has the following function body:
 
