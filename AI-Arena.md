@@ -79,12 +79,13 @@ it can save some gas, though we might introduce `mstore` opcode use, but since t
 ```
 
 #### Recommendation: 
- ```javascript
+ ```diff
  function addAttributeDivisor(uint8[] memory attributeDivisors) external {
       + uint256 attributesLength = attributes.length;
         require(msg.sender == _ownerAddress);
         require(attributeDivisors.length == attributesLength);
-	
+
+      - uint256 attributesLength = attributes.length;
         for (uint8 i = 0; i < attributesLength; i++) {
             attributeToDnaDivisor[attributes[i]] = attributeDivisors[i];
         }
