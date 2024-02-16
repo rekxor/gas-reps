@@ -23,7 +23,7 @@
 | --------------- | ---------------------------------------------------------------------------------------------------- |  
 | [G-01](#g-01-check-for-amount--0-before-making-_burn-call) | Unspecified Compiler version pragma                              |  
 | [G-02](#g-02-cache-attributeslength-only-once-to-avoid-extra-gas-usage) | Consideration for Timestamp overflow in `_replenishVoltage()`                           |  
-| [L - 03](#l-03-use-openzeppelins-ownable-contract-for-ownership-related-actions) | Use OpenZeppelin's Ownable contract for `ownership` related actions                |  
+| [G-03](#l-03-redundant-operation-of-initializing-attributeProbabilities-mapping-in-constructor-leads-to-unnecessary-gas-consumption) |  Redundant operation of initializing attributeProbabilities mapping in `constructor` leads to unnecessary gas consumption            |  
 | [L - 04](#l-04-setupairdrop-function-arg-recipients-can-have-duplicates) | `setupAirdrop()` function arg: recipients[] can have duplicates                    | 
 | [L - 05](#l-05-unsafe-erc20-operations-use-safeerc20-library) | Unsafe ERC20 Operation(s), use `SafeERC20` library            |  
 | [L - 06](#l-06-transferfrom-returns-a-bool-value-in-claim-which-is-not-checked) | `transferFrom()` returns a bool value in `claim()`, which is not checked                  |  
@@ -107,3 +107,32 @@ uint256 attributesLength = attributes.length;
 - uint256 attributesLength = attributes.length;
 ```
 ##
+## [G-02] Redundant operation of initializing attributeProbabilities mapping in `constructor` leads to unnecessary gas consumption  
+#### Description: 
+In the `constructor` while initializing state variables, we make `addAttributeProbabilities(0, probabilities)` function call which has the following function body:
+
+**Code:** 
+```javascript
+function addAttributeProbabilities(uint256 generation, uint8[][] memory probabilities) public {
+    require(msg.sender == _ownerAddress);
+    require(probabilities.length == 6, "Invalid number of attribute arrays");
+// here we have generation as 0
+    uint256 attributesLength = attributes.length;
+    for (uint8 i = 0; i < attributesLength; i++) {
+        attributeProbabilities[generation][attributes[i]] = probabilities[i];
+    }
+}
+```
+But our constructor does this same operation after calling the above function, following is the code from the `constructor`:
+```javascript
+uint256 attributesLength = attributes.length;
+for (uint8 i = 0; i < attributesLength; i++) {
+    attributeProbabilities[0][attributes[i]] = probabilities[i];
+    attributeToDnaDivisor[attributes[i]] = defaultAttributeDivisor[i];
+}
+```
+This causes additional gas usage for doing an operation that has been done again, the modification of the state variables by extra call will not be done. Just the contract deployer will be charged additional gas for doing redundant initialization of the mapping. 
+#### Recommendation: 
+Based on the implementation of the `addAttributeProbabilities()` it appears that, it just initializes the attributeProbabilities mapping, but in the constructor `for` loop we also initialize the attributeToDnaDivisor mapping. So `addAttributeProbabilities()` and `addAttributeDivisor()` should be called in `constructor` or either keep the `for` loop in the constructor which does the initialization for both mappings. Thus, include initialization only once, either via function call, or initializing in the `constructor` itself to avoid unnecessary usage of gas.  
+***
+---
