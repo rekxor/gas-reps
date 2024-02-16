@@ -21,8 +21,8 @@
 
 | ID              | Title                                                                                                
 | --------------- | ---------------------------------------------------------------------------------------------------- |  
-| [G-01](#g-01-unspecified-compiler-version-pragma) | Unspecified Compiler version pragma                              |  
-| [G-02](#g-02-consideration-for-timestamp-overflow-in-_replenishvoltage) | Consideration for Timestamp overflow in `_replenishVoltage()`                           |  
+| [G-01](#g-01-check-for-amount--0-before-making-_burn-call) | Unspecified Compiler version pragma                              |  
+| [G-02](#g-02-cache-attributeslength-only-once-to-avoid-extra-gas-usage) | Consideration for Timestamp overflow in `_replenishVoltage()`                           |  
 | [L - 03](#l-03-use-openzeppelins-ownable-contract-for-ownership-related-actions) | Use OpenZeppelin's Ownable contract for `ownership` related actions                |  
 | [L - 04](#l-04-setupairdrop-function-arg-recipients-can-have-duplicates) | `setupAirdrop()` function arg: recipients[] can have duplicates                    | 
 | [L - 05](#l-05-unsafe-erc20-operations-use-safeerc20-library) | Unsafe ERC20 Operation(s), use `SafeERC20` library            |  
