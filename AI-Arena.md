@@ -19,7 +19,7 @@
 ## List of Findings 
 
 |   **ID**              | **Title**                                                                                                | 
-| --------------- | ---------------------------------------------------------------------------------------------------- |  
+|:--------------------:|---------------------------------------------------------------------------------------------------|  
 | [G-01](#g-01-check-for-amount--0-before-making-_burn-call) | Check for `amount = 0` before making `_burn()` call                     |  
 | [G-02](#g-02-cache-attributeslength-only-once-to-avoid-extra-gas-usage) | Cache `attributes.length` only once to avoid extra gas usage |  
 | [G-03](#g-03-redundant-operation-of-initializing-attributeProbabilities-mapping-in-constructor-leads-to-unnecessary-gas-consumption) |  Redundant operation of initializing `attributeProbabilities` mapping in `constructor` leads to unnecessary gas consumption            |  
@@ -33,7 +33,8 @@ It is unnecessary to call `_burn()`  on amount  = 0, it leads to wastage of gas 
 
 *"SSTORE, the opcode which saves data in storage, costs 20,000 gas when a storage value is set to a non-zero value from zero and costs 5000 gas when a storage variable’s value is set to zero or remains unchanged from zero."*
 
-#### [Neuron.sol::burn()](https://github.com/code-423n4/2024-02-ai-arena/blob/main/src/Neuron.sol#L163-L165)
+ [Neuron.sol::burn()](https://github.com/code-423n4/2024-02-ai-arena/blob/main/src/Neuron.sol#L163-L165)
+ 
 **Code:**
 ```javascript
 function  burn(uint256 amount) public virtual {
@@ -57,7 +58,8 @@ The `attributesLength` caches to avoid computation of array length of state vari
 
 But, if we declare it before doing `require(attributeDivisors.length == attributes.length);`
 it can save some gas, though we might introduce `mstore` opcode use, but since the function is only callable by owner, it is less likely that above require check to fail. 
-#### [AiArenaHelper::addAttributeDivisor](https://github.com/code-423n4/2024-02-ai-arena/blob/cd1a0e6d1b40168657d1aaee8223dc050e15f8cc/src/AiArenaHelper.sol#L68-L76)
+
+ [AiArenaHelper::addAttributeDivisor](https://github.com/code-423n4/2024-02-ai-arena/blob/cd1a0e6d1b40168657d1aaee8223dc050e15f8cc/src/AiArenaHelper.sol#L68-L76)
 
 **Code:** 
  ```javascript
@@ -106,6 +108,7 @@ uint256 attributesLength = attributes.length;
 In the `constructor` while initializing state variables, we make `addAttributeProbabilities(0, probabilities)` function call which has the following function body:
 
 **Code:** 
+[AiArenaHelper.sol::addAttributeProbabilities()](https://github.com/code-423n4/2024-02-ai-arena/blob/main/src/AiArenaHelper.sol#L131-L139)
 ```javascript
 function addAttributeProbabilities(uint256 generation, uint8[][] memory probabilities) public {
     require(msg.sender == _ownerAddress);
@@ -118,6 +121,7 @@ function addAttributeProbabilities(uint256 generation, uint8[][] memory probabil
 }
 ```
 But our constructor does this same operation after calling the above function, following is the code from the `constructor`:
+[AiArenaHelper.sol::constructor](https://github.com/code-423n4/2024-02-ai-arena/blob/main/src/AiArenaHelper.sol#L41-L52)
 ```javascript
 uint256 attributesLength = attributes.length;
 for (uint8 i = 0; i < attributesLength; i++) {
