@@ -20,8 +20,8 @@
 
 |   **ID**              | **Title**                                                                                                | 
 | --------------- | ---------------------------------------------------------------------------------------------------- |  
-| [G-01](#g-01-check-for-amount--0-before-making-_burn-call) | Unspecified Compiler version pragma                              |  
-| [G-02](#g-02-cache-attributeslength-only-once-to-avoid-extra-gas-usage) | Consideration for Timestamp overflow in `_replenishVoltage()`                           |  
+| [G-01](#g-01-check-for-amount--0-before-making-_burn-call) | Check for `amount = 0` before making `_burn()` call                     |  
+| [G-02](#g-02-cache-attributeslength-only-once-to-avoid-extra-gas-usage) | Cache `attributes.length` only once to avoid extra gas usage |  
 | [G-03](#g-03-redundant-operation-of-initializing-attributeProbabilities-mapping-in-constructor-leads-to-unnecessary-gas-consumption) |  Redundant operation of initializing `attributeProbabilities` mapping in `constructor` leads to unnecessary gas consumption            |  
 
 
