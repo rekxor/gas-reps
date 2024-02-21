@@ -28,7 +28,7 @@
 ---
 ---
 ## [G-01] Check for `amount = 0` before making `_burn()` call
-#### Summary:
+#### Description:
 It is unnecessary to call `_burn()`  on amount  = 0, it leads to wastage of gas as `_burn()`  itself doesn't have such check before writing to state variables of the contract, thereby calling `SSTORE` EVM opcode, which costs significant amount of gas.
 
 *"SSTORE, the opcode which saves data in storage, costs 20,000 gas when a storage value is set to a non-zero value from zero and costs 5000 gas when a storage variable’s value is set to zero or remains unchanged from zero."*
@@ -53,7 +53,7 @@ function  burn(uint256 amount) public virtual {
 ```
 ##
 ## [G-02] Cache `attributes.length` only once to avoid extra gas usage
-#### Summary: 
+#### Description: 
 The `attributesLength` caches to avoid computation of array length of state variable (costly) with each iteration is appreciated.
 
 But, if we declare it before doing `require(attributeDivisors.length == attributes.length);`
@@ -88,7 +88,7 @@ function addAttributeDivisor(uint8[] memory attributeDivisors) external {
 }    
 ```
 ### Another Instance: 
-#### [createPhysicalAttributes](https://github.com/code-423n4/2024-02-ai-arena/blob/cd1a0e6d1b40168657d1aaee8223dc050e15f8cc/src/AiArenaHelper.sol#L96-L98)
+ [AiArenaHelper.sol::createPhysicalAttributes](https://github.com/code-423n4/2024-02-ai-arena/blob/cd1a0e6d1b40168657d1aaee8223dc050e15f8cc/src/AiArenaHelper.sol#L96-L98)
 
 **Code:**
 ```javascript
