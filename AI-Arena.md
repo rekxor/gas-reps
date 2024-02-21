@@ -6,12 +6,11 @@
 
 ## Overview
 
-|              		|                                                         |
-| --------------------- | ------------------------------------------------------- |
 | **Project Name**	| **AI Arena**                                            |
+| --------------------- | ------------------------------------------------------- |
 | **Repository**   	| [Github](https://github.com/code-423n4/2024-02-ai-arena)|
 | **Website**      	| [AI Arena](https://aiarena.io/#/)                       |
-| **X(Twitter)**   	| [X](https://twitter.com/aiarena_)             	  |
+| **X(Twitter)**   	| [𝕏](https://twitter.com/aiarena_)             	  |
 | **Discord**      	| [Discord](https://discord.gg/aiarena)                   |
 | **Total SLoC**  	| **1197** over **8** contracts                           |
 
@@ -19,17 +18,12 @@
 
 ## List of Findings 
 
-| ID              | Title                                                                                                
+|   **ID**              | **Title**                                                                                                | 
 | --------------- | ---------------------------------------------------------------------------------------------------- |  
 | [G-01](#g-01-check-for-amount--0-before-making-_burn-call) | Unspecified Compiler version pragma                              |  
 | [G-02](#g-02-cache-attributeslength-only-once-to-avoid-extra-gas-usage) | Consideration for Timestamp overflow in `_replenishVoltage()`                           |  
 | [G-03](#g-03-redundant-operation-of-initializing-attributeProbabilities-mapping-in-constructor-leads-to-unnecessary-gas-consumption) |  Redundant operation of initializing `attributeProbabilities` mapping in `constructor` leads to unnecessary gas consumption            |  
-| [L - 04](#l-04-setupairdrop-function-arg-recipients-can-have-duplicates) | `setupAirdrop()` function arg: recipients[] can have duplicates                    | 
-| [L - 05](#l-05-unsafe-erc20-operations-use-safeerc20-library) | Unsafe ERC20 Operation(s), use `SafeERC20` library            |  
-| [L - 06](#l-06-transferfrom-returns-a-bool-value-in-claim-which-is-not-checked) | `transferFrom()` returns a bool value in `claim()`, which is not checked                  |  
-| [NC-01](#nc-01-contracts-doesnt-follow-the-layout-ordering) | Contracts doesn't follow the layout ordering                  | 
-| [NC-02](#nc-02-functions-mutating-storage-can-better-emit-events-for-off-chain-tracking) | Functions mutating storage, can better emit events for off-chain tracking                                                     | _Non Critical_ |
-| [NC-03](#nc-03-better-to-emit-events-before-making-an-external-call) | Better to emit events before making an external call                    |  
+
 
 ---
 ---
