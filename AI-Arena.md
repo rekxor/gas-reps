@@ -37,7 +37,7 @@ It is unnecessary to call `_burn()`  on amount  = 0, it leads to wastage of gas 
 **Code:**
 ```javascript
 function  burn(uint256 amount) public virtual {
-	//qa/gas- don't call for amt = 0, wastage of gas on add/sub 0 
+	//gas- don't call for amt = 0, wastage of gas on add/sub 0 
 	//to/from state variable.
 	_burn(msg.sender, amount);
 }
