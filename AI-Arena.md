@@ -1,8 +1,8 @@
 
-# Gas Report : AI Arena Contest | 9<sup>th</sup> Feb 2024 - 21<sup>st</sup> Feb 2024
+# Gas Report : AI Arena Contest | 9th Feb 2024 - 21st Feb 2024
 
 ## Executive summary
- **AI Arena** is a PvP platform fighting game where the fighters are AIs that were trained by humans.
+ **AI Arena** is a PvP platform fighting game where the fighters are AIs that were trained by humans. In AI Arena you train an AI character to battle in a platform fighting game. Imagine a cross between Pokémon and Super Smash Bros, but the characters are AIs, and you can train them to learn almost any skill in preparation for battle.
 
 ## Overview
 
