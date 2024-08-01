@@ -1,5 +1,5 @@
 
-# Gas Report : AI Arena Contest 
+# Gas Report : AI Arena   
 
 ## Executive summary
  **AI Arena** is a PvP platform fighting game where the fighters are AIs that were trained by humans. In AI Arena you train an AI character to battle in a platform fighting game. Imagine a cross between Pokémon and Super Smash Bros, but the characters are AIs, and you can train them to learn almost any skill in preparation for battle.
